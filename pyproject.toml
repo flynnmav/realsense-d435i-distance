@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "d435i-distance"
+version = "1.0.0"
+description = "Intel RealSense D435i 实时测距与可视化: 实时画面标注目标真实距离, 支持 CSV/JSONL 数据输出"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Liu Leyan" }]
+dependencies = [
+    "numpy>=1.24",
+    "opencv-python>=4.8",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+realsense = ["pyrealsense2>=2.55.1"]
+test = ["opencv-python-headless"]
+
+[project.scripts]
+d435i-distance = "d435i_distance.cli:main"
+
+[tool.setuptools]
+packages = ["d435i_distance"]

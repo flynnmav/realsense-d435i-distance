@@ -1,0 +1,7 @@
+# RealSense D435i 实时测距系统依赖
+# 注意: pyrealsense2 官方 wheel 对 Python 3.9 ~ 3.11 支持最完整,
+# 推荐使用 Python 3.11 (Linux 需先安装 librealsense2, 详见 README)。
+numpy>=1.24
+opencv-python>=4.8
+PyYAML>=6.0
+pyrealsense2>=2.55.1

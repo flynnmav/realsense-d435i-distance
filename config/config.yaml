@@ -1,0 +1,13 @@
+# D435i 默认参数 (命令行参数优先级高于此文件)
+camera:
+  width: 1280          # 彩色/深度流宽度
+  height: 720          # 流高度
+  fps: 30              # 帧率
+  laser_emitter: true  # 红外点阵投影(弱纹理场景建议开启)
+
+visualization:
+  min_depth_m: 0.3     # 深度伪彩色最近显示距离(米)
+  max_depth_m: 6.0     # 深度伪彩色最远显示距离(米)
+
+measurement:
+  median_radius: 2     # 测距时取目标像素邻域中位数的半径(降噪)
