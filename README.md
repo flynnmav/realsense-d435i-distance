@@ -183,6 +183,9 @@ python scripts/smoke_test.py --frames 30
 ## 常见问题
 
 - **提示"未检测到 RealSense 设备"**: 检查 USB 连接(需 USB 3.0)、是否被 RealSense Viewer 等其他程序占用; 更换数据线/接口重试。
+- **`conda env create` 卡住或网络报错**: 多为镜像源(如清华镜像)临时异常。可改用官方源创建等价环境(命令行参数优先级高于 .condarc 中的镜像):
+  `conda create -n d435i --override-channels -c https://repo.anaconda.com/pkgs/main python=3.11 numpy pyyaml opencv pip`
+  再 `pip install pyrealsense2`; 或稍后重试 `conda env create -f environment.yml`。
 - **画面中部分区域无深度(显示 N/A)**: 强反光、玻璃/纯黑表面、超出量程(约 0.3~6 m)都会导致无深度; 弱纹理场景建议保持红外点阵开启。
 - **距离精度**: D435i 深度误差通常为量程的 1% 以内(近距离约毫米级), 目标过远或反光材质时变差; 多次测量取均值可进一步降噪。
 - **D435i 与 D435 的区别**: D435i 额外内置 IMU(BMI055)。本系统当前只用深度+彩色, 两者均可直接运行。
