@@ -16,7 +16,7 @@ def main() -> int:
             h, w = bundle.depth.shape
             raw = int(bundle.depth[h // 2, w // 2])
             print(f"画面中心原始深度值: {raw} (约 {raw * bundle.depth_units:.3f} m)")
-            print("设备工作正常 ✓")
+            print("设备工作正常 [OK]")
             return 0
     except RuntimeError as e:
         print(f"[ERROR] {e}", file=sys.stderr)

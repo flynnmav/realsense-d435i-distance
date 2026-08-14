@@ -166,6 +166,7 @@ with RealSenseCamera(StreamConfig(width=1280, height=720)) as cam:
 │   └── cli.py                 # 命令行入口 + 交互窗口 + 数据录制
 ├── scripts/
 │   ├── check_camera.py        # 设备连接检查
+│   ├── depth_diag.py          # 深度分布诊断(ASCII 深度图, 排查无深度)
 │   └── smoke_test.py          # 无 GUI 冒烟测试(连续测距统计)
 └── tests/                     # 无需相机的单元测试
 ```
@@ -186,7 +187,7 @@ python scripts/smoke_test.py --frames 30
 - **`conda env create` 卡住或网络报错**: 多为镜像源(如清华镜像)临时异常。可改用官方源创建等价环境(命令行参数优先级高于 .condarc 中的镜像):
   `conda create -n d435i --override-channels -c https://repo.anaconda.com/pkgs/main python=3.11 numpy pyyaml opencv pip`
   再 `pip install pyrealsense2`; 或稍后重试 `conda env create -f environment.yml`。
-- **画面中部分区域无深度(显示 N/A)**: 强反光、玻璃/纯黑表面、超出量程(约 0.3~6 m)都会导致无深度; 弱纹理场景建议保持红外点阵开启。
+- **画面中部分区域无深度(显示 N/A)**: 强反光、玻璃/纯黑表面、超出量程(约 0.3~6 m)都会导致无深度; 弱纹理场景建议保持红外点阵开启。排查时可运行 `python scripts/depth_diag.py` 查看整幅深度分布。
 - **距离精度**: D435i 深度误差通常为量程的 1% 以内(近距离约毫米级), 目标过远或反光材质时变差; 多次测量取均值可进一步降噪。
 - **D435i 与 D435 的区别**: D435i 额外内置 IMU(BMI055)。本系统当前只用深度+彩色, 两者均可直接运行。
 
