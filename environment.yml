@@ -1,0 +1,15 @@
+# conda 环境定义: RealSense D435i 实时测距系统
+# 用法:
+#   conda env create -f environment.yml
+#   conda activate d435i
+name: d435i
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy>=1.24
+  - pyyaml>=6.0
+  - opencv>=4.6
+  - pip
+  - pip:
+      - pyrealsense2>=2.55.1

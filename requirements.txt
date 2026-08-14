@@ -1,4 +1,5 @@
 # RealSense D435i 实时测距系统依赖
+# 若使用 conda, 推荐优先用 environment.yml 创建环境
 # 注意: pyrealsense2 官方 wheel 对 Python 3.9 ~ 3.11 支持最完整,
 # 推荐使用 Python 3.11 (Linux 需先安装 librealsense2, 详见 README)。
 numpy>=1.24

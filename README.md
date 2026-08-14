@@ -29,27 +29,39 @@ distance = sqrt(X^2 + Y^2 + Z^2)
 
 - 硬件: Intel RealSense D435i, 建议 USB 3.0 接口
 - 系统: Windows 10/11, Ubuntu 20.04 / 22.04
-- Python: **3.9 ~ 3.11**(pyrealsense2 官方 wheel 对 3.11 支持最完整; 3.12+ 视 pyrealsense2 版本而定)
+- Python: **3.9 ~ 3.11**(pyrealsense2 官方 wheel 对 3.11 支持最完整; 3.12+ 视 pyrealsense2 版本而定), 推荐用 conda 管理环境
 
 ## 安装
 
-### Windows
+### 方式一: conda(推荐)
 
 ```bash
-# 1. 创建虚拟环境(以 Python 3.11 为例)
-python -m venv .venv
-.venv\Scripts\activate
+# 1. 一键创建环境(自动安装 Python 3.11 / numpy / opencv / pyyaml / pyrealsense2)
+conda env create -f environment.yml
 
-# 2. 安装依赖
-pip install -r requirements.txt
+# 2. 激活环境
+conda activate d435i
+
+# 3. 验证设备
+python scripts/check_camera.py
 ```
 
-> pyrealsense2 的 Windows wheel 自带 librealsense 动态库, 无需额外安装 SDK。
+> `environment.yml` 中的 pyrealsense2 通过 pip 段安装(conda 频道暂无官方包),
+> 其 Windows wheel 自带 librealsense 动态库, 无需额外安装 SDK。
+> 国内网络建议先配置 conda 清华镜像; 环境名称默认 d435i, 可在 environment.yml 中修改。
+
+### 方式二: pip + venv
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate        # Linux: source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 ### Linux (Ubuntu)
 
 ```bash
-# 先按 Intel 官方说明安装 librealsense2 系统库, 再:
+# conda 方式同样适用; 若使用 pip 方式, 需先按 Intel 官方说明安装 librealsense2 系统库
 pip install -r requirements.txt
 ```
 
@@ -61,7 +73,7 @@ pip install -r requirements.txt
 python scripts/check_camera.py
 ```
 
-2. 启动实时测距:
+2. 启动实时测距(conda 环境先执行 `conda activate d435i`):
 
 ```bash
 python main.py
@@ -143,6 +155,8 @@ with RealSenseCamera(StreamConfig(width=1280, height=720)) as cam:
 ```text
 .
 ├── main.py                    # 程序入口: 实时测距可视化
+├── environment.yml            # conda 环境定义(推荐安装方式)
+├── requirements.txt           # pip 依赖清单
 ├── config/config.yaml         # 默认参数(分辨率/显示范围/滤波半径)
 ├── d435i_distance/
 │   ├── camera.py              # 相机打开/取帧/设备信息(深度对齐彩色)
